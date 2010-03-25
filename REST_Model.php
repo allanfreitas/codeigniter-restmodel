@@ -103,47 +103,47 @@ class REST_Model extends Model
     	
 		switch ($method) 
 		{
-    		case 'GET':
-    			if ($parameters !== '')
-    			{
-    				curl_setopt($ch, CURLOPT_URL, $url.'?'.$parameters);
-    			}
-    			break;
-    			
-    		case 'POST':
-    			curl_setopt($ch, CURLOPT_POST, TRUE);
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);  
-    			break;
-    			
-    		case 'DELETE':
-    			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-				curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters); 
-    			break;
-    	}
+			case 'GET':
+				if ($parameters !== '')
+				{
+					curl_setopt($ch, CURLOPT_URL, $url.'?'.$parameters);
+				}
+				break;
+			
+			case 'POST':
+				curl_setopt($ch, CURLOPT_POST, TRUE);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+				break;
+			
+			case 'DELETE':
+				curl_setopt($ch, CURLOPT_POST, TRUE);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
+				break;	
+		}
     	
     	
-    	//---------------------------------------------------
-    	// Execute!
+		//---------------------------------------------------
+		// Execute!
     	    	
-    	$data = curl_exec($ch);
-    	curl_close($ch);
+		$data = curl_exec($ch);
+		curl_close($ch);
     	
-    	if($data === FALSE)
-        {
-           return FALSE;
-        }
+		if($data === FALSE)
+		{
+			return FALSE;
+		}
         
                 
-        //---------------------------------------------------
-    	// Let's decode the content into a PHP array before returning
+		//---------------------------------------------------
+		// Let's decode the content into a PHP array before returning
         
-        if(method_exists($this, 'decode_'.$this->format))
-        {
-            $data = $this->{'decode_'.$this->format}($data);
-        }
+		if(method_exists($this, 'decode_'.$this->format))
+		{
+			$data = $this->{'decode_'.$this->format}($data);
+		}
 		
 		return $data;
-    }
+	}
     
 
    	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
