@@ -69,8 +69,8 @@ class REST_Model extends Model
 	function curl ($method, $url, $parameters)
 	{	    	
     
-    	//---------------------------------------------------
-    	// Initialise cURL handle and setup a few standard options
+		//---------------------------------------------------
+		// Initialise cURL handle and setup a few standard options
     	
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);  
@@ -143,6 +143,7 @@ class REST_Model extends Model
 		}
 		
 		return $data;
+		
 	}
     
 
@@ -161,9 +162,9 @@ class REST_Model extends Model
    	
    	
    	function decode_xml($data)
-    {
-    	return (array) simplexml_load_string($data);
-    }
+	{
+		return (array) simplexml_load_string($data);
+	}
    	
 
 }
