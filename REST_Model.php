@@ -116,7 +116,7 @@ class REST_Model extends Model
 				break;
 			
 			case 'DELETE':
-				curl_setopt($ch, CURLOPT_POST, TRUE);
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 				curl_setopt($ch, CURLOPT_POSTFIELDS, $parameters);
 				break;	
 		}
